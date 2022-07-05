@@ -1,0 +1,36 @@
+
+version: "3.9"
+
+services:
+
+  app:
+    container_name: demo.app
+    image: 065659108092.dkr.ecr.us-east-1.amazonaws.com/dotnet_app:tag
+    restart: unless-stopped
+    ports:
+      - 5001:5001
+    networks:
+      - demonet
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: http://0.0.0.0:5001
+
+  react:
+    container_name: demo.react
+    image: 065659108092.dkr.ecr.us-east-1.amazonaws.com/react_app:tag
+    restart: unless-stopped
+    ports:
+      - 80:3000
+    networks:
+      - demonet
+    environment:
+      BACKEND_HOST: http://3.89.90.9:5001/
+    stdin_open: true
+    command: npm start
+    volumes: 
+       - ./src:/app/src
+       - ./public/assets:/app/public/assets
+       - /app/node_modules
+networks:
+  demonet:
+    name: demonet
