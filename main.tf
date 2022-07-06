@@ -24,39 +24,3 @@ resource "aws_instance" "application" {
   	Name = "application"
   }
 }
-
-resource "aws_security_group" "security_demo" {
-	name = "security_demo"
-	
-	ingress {
-	 from_port = 0
-	 protocol="TCP"
-	 to_port=80
-	 cidr_blocks=["0.0.0.0/0"]
-	}
-	
-	ingress {
-	 from_port = 1433
-	 protocol="TCP"
-	 to_port=1433
-	 cidr_blocks=["0.0.0.0/0"]
-	}
-
-    ingress {
-	 from_port = 5001
-	 protocol="TCP"
-	 to_port=5001
-	 cidr_blocks=["0.0.0.0/0"]
-	}
-	
-	egress {
-	 from_port = 0
-	 protocol="-1"
-	 to_port=0
-	 cidr_blocks=["0.0.0.0/0"]
-	}
-	
-	tags = {
-	    Name = "Allow HTTP"
-	}
-}
