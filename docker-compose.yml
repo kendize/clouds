@@ -1,9 +1,8 @@
-
 version: "3.9"
 
 services:
 
-  app:
+  application:
     container_name: demo.app
     image: 065659108092.dkr.ecr.us-east-1.amazonaws.com/dotnet_app:tag
     restart: unless-stopped
@@ -16,6 +15,8 @@ services:
       ASPNETCORE_URLS: http://0.0.0.0:5001
 
   react:
+    depends_on:
+    - application
     container_name: demo.react
     image: 065659108092.dkr.ecr.us-east-1.amazonaws.com/react_app:tag
     restart: unless-stopped
@@ -24,13 +25,8 @@ services:
     networks:
       - demonet
     environment:
-      BACKEND_HOST: http://3.89.90.9:5001/
+      REACT_APP_BACKEND_HOST: 3.89.90.9
     stdin_open: true
-    command: npm start
-    volumes: 
-       - ./src:/app/src
-       - ./public/assets:/app/public/assets
-       - /app/node_modules
 networks:
   demonet:
     name: demonet
