@@ -7,6 +7,13 @@ terraform {
   }
 }
 
+provider "aws" {
+  access_key = AKIAQ6SMWPL6LYLKHDAE
+  secret_key = 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
+  region     = "us-east-1"
+}
+
+
 # Configure the AWS Provider
 provider "aws" {
 }
