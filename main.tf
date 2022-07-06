@@ -13,11 +13,6 @@ provider "aws" {
   region     = "us-east-1"
 }
 
-
-# Configure the AWS Provider
-provider "aws" {
-}
-
 # Create a VPC
 resource "aws_instance" "application" {
   ami			  = "ami-052efd3df9dad4825"
